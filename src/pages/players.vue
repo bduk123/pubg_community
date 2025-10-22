@@ -75,7 +75,7 @@
           >
             <AppSelect
               v-model="selectedRole"
-              placeholder="Цол"
+              placeholder="Rank"
               :items="role"
               clearable
               clear-icon="tabler-x"
@@ -180,9 +180,10 @@
         </VCard>
       </VCol>
     </VRow>
-    <VDialog v-model="isDialogOpen" max-width="600">
-  <DialogCloseBtn @click="isDialogOpen = false" />
-
+    <VDialog v-model="isDialogOpen" max-width="1200">
+  <DialogCloseBtn @click="isDialogOpen = false"/>
+  <div class="d-flex flex-wrap>">
+      <div class="d-p-flex flex-column pa-0">
   <VCard class="mb-4">
     <VCardTitle class="d-flex justify-space-between align-center mt-3 font-weight-bold">
       Дэлгэрэнгүй мэдээлэл
@@ -252,88 +253,111 @@
   </VCard>
 
   <VCard>
-    <VCardTitle class="font-weight-bold mt-3">
+    <VCardTitle class="font-weight-bold mt-3 ">
       BIO
     </VCardTitle>
-    <VCardText :class="isDark ? 'text-white' : 'text-black'">
-        <div v-if="selectedPlayer?.bio">
-            {{ selectedPlayer.bio }}
-        </div>
-        <div v-else class="text-medium-emphasis mt-2 text-center w-100">
-            Энэ тоглогч BIO оруулаагүй байна.
-        </div>
-        </VCardText>
+    <VCardText class="mb-5" :class="[isDark ? 'text-white' : 'text-black']">
+  <!-- Bio -->
+  <div v-if="selectedPlayer?.bio">
+    {{ selectedPlayer.bio }}
+  </div>
+  <div v-else class="text-medium-emphasis mt-2 text-center w-100">
+    Энэ тоглогч BIO оруулаагүй байна.
+  </div>
+</VCardText>
   </VCard>
 
-  <VCard class="mt-4">
+
+</div>
+<div class="d-p-flex flex-column pa-0 ms-4" style="width: 50%; max-width: 100%;">
+
+  <VCard class="mt-0" >
+  <VCardTitle class="font-weight-bold mt-3" >
+    Highlights
+  </VCardTitle>
+  <VCardText>
+    <div v-if="selectedPlayer?.youtube_embed && selectedPlayer.youtube_embed.includes('<iframe')">
+      <div class="video-container" v-html="selectedPlayer.youtube_embed"></div>
+    </div>
+    <div v-else class="d-flex flex-column align-center justify-center" max-height="320px" style="height: 320px; border-radius: 8px; background-color: rgba(0, 0, 0, 0.05);">
+  <VIcon icon="mdi-video" size="88" />
+  <div :class="[isDark ? 'text-white' : 'text-black']">
+    Энэ тоглогч Highlight оруулаагүй байна.
+  </div>
+</div>
+  </VCardText>
+</VCard>
+<VCard class="mt-4">
   <VCardTitle class="font-weight-bold mt-3">
     Social Links
   </VCardTitle>
 
-  <VCardText :class="isDark ? 'text-white' : 'text-black'">
-    <div v-if="selectedPlayer?.social_links" class="d-flex flex-wrap gap-3 mt-2">
-      <VBtn
-        v-if="selectedPlayer.social_links.facebook"
-        :href="selectedPlayer.social_links.facebook"
-        target="_blank"
-        rel="noopener"
-        color="primary"
-        variant="outlined"
-        prepend-icon="mdi-facebook"
-      >
-        Facebook
-      </VBtn>
-      <VBtn
-        v-if="selectedPlayer.social_links.instagram"
-        :href="selectedPlayer.social_links.instagram"
-        target="_blank"
-        rel="noopener"
-        color="error"
-        variant="outlined"
-        prepend-icon="mdi-instagram"
-      >
-        Instagram
-      </VBtn>
-        <VBtn
-            v-if="selectedPlayer.social_links.steam"
-            :href="selectedPlayer.social_links.steam"
-            target="_blank"
-            rel="noopener"
-            color="default"
-            variant="outlined"
-            prepend-icon="mdi-steam"
-        >
-            Steam
-        </VBtn>
-        <VBtn
-            v-if="selectedPlayer.social_links.discord"
-            :href="selectedPlayer.social_links.discord"
-            target="_blank"
-            rel="noopener"
-            color="secondary"
-            variant="outlined"
-            prepend-icon="mdi-discord"
-        >
-            Discord
-        </VBtn>
-        <VBtn
-            v-if="selectedPlayer.social_links.twitch"
-            :href="selectedPlayer.social_links.twitch"
-            target="_blank"
-            rel="noopener"
-            color="success"
-            variant="outlined"
-            prepend-icon="mdi-twitch"
-        >
-            Twitch
-        </VBtn>
-    </div>
+  <VCardText :class="[isDark ? 'text-white' : 'text-black']">
+  <div v-if="selectedPlayer?.social_links" class="d-flex flex-wrap gap-3 mt-1">
+    <VBtn
+      v-if="selectedPlayer.social_links.facebook"
+      :href="selectedPlayer.social_links.facebook"
+      target="_blank"
+      rel="noopener"
+      color="primary"
+      variant="outlined"
+      prepend-icon="mdi-facebook"
+    >
+      Facebook
+    </VBtn>
+    <VBtn
+      v-if="selectedPlayer.social_links.instagram"
+      :href="selectedPlayer.social_links.instagram"
+      target="_blank"
+      rel="noopener"
+      color="error"
+      variant="outlined"
+      prepend-icon="mdi-instagram"
+    >
+      Instagram
+    </VBtn>
+    <VBtn
+      v-if="selectedPlayer.social_links.steam"
+      :href="selectedPlayer.social_links.steam"
+      target="_blank"
+      rel="noopener"
+      color="default"
+      variant="outlined"
+      prepend-icon="mdi-steam"
+    >
+      Steam
+    </VBtn>
+    <VBtn
+      v-if="selectedPlayer.social_links.discord"
+      :href="selectedPlayer.social_links.discord"
+      target="_blank"
+      rel="noopener"
+      color="secondary"
+      variant="outlined"
+      prepend-icon="mdi-discord"
+    >
+      Discord
+    </VBtn>
+    <VBtn
+      v-if="selectedPlayer.social_links.twitch"
+      :href="selectedPlayer.social_links.twitch"
+      target="_blank"
+      rel="noopener"
+      color="success"
+      variant="outlined"
+      prepend-icon="mdi-twitch"
+    >
+      Twitch
+    </VBtn>
+  </div>
 
-    <div v-else :class="isDark ? 'text-white' : 'text-black'" class="text-medium-emphasis mt-2 text-center w-100">
+  <div v-else :class="isDark ? 'text-white' : 'text-black'" class="text-medium-emphasis mt-2 mb-3 text-center w-100">
     Энэ тоглогч сошиал хаяг оруулаагүй байна.
-    </div>
-  </VCardText>
+  </div>
+</VCardText>
 </VCard>
+</div>
+</div>
 
 </VDialog>
 
@@ -401,6 +425,7 @@ const getRandomColor = () => {
       name: 'Rullet',
       avatar: avatar2,
       social_links: null,
+      youtube_embed:'<iframe width="560" height="315" src="https://www.youtube.com/embed/TWUKUQtrnRU?si=yendAidfJ96CXTsH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
       badge: {
         0: 'хүндэт PUBG-чин',
       },
@@ -422,6 +447,7 @@ const getRandomColor = () => {
         twitch: 'https://twitch.com/santana',
       },
       role: 'Tier 7-2',
+      youtube_embed: '<iframe width="560" height="315" src="https://www.youtube.com/embed/2zquaQQDz5c?si=OTewCmRo0EmqRmcH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
       experience: '6 жил',
       pubg_id: 'Abdieeeee',
       badge: {
@@ -476,3 +502,23 @@ const role = computed(() => {
 })
   </script>
   
+  <style scoped>
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; 
+  height: 320px;
+  border-radius: 8px;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px !important; /* Responsive width */
+  height: 100% !important;
+  border: none;
+  max-height: 300px; /* Smaller height */
+  max-width: 600px;
+}
+
+</style>

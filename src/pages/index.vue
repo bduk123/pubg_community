@@ -228,7 +228,7 @@ onMounted(() => {
 }
 .stats-container {
   position: absolute;
-  bottom: 31.5%;
+  bottom: 30.5%;
   left: 32%;
   transform: translateX(-50%);
   display: flex;
