@@ -1,5 +1,5 @@
 <script setup>
-import navItems from '@/navigation/vertical'
+import navItems from '@/navigation/horizontal'
 import { useThemeConfig } from '@core/composable/useThemeConfig'
 
 // Components
@@ -19,7 +19,16 @@ const { width: windowWidth } = useWindowSize()
     <!-- 👉 navbar -->
     <template #navbar="{ toggleVerticalOverlayNavActive }">
       <div class="d-flex h-100 align-center">
-
+        <IconBtn
+          id="vertical-nav-toggle-btn"
+          class="ms-n3 d-lg-none"
+          @click="toggleVerticalOverlayNavActive(true)"
+        >
+          <VIcon
+            size="26"
+            icon="tabler-menu-2"
+          />
+        </IconBtn>
 
         <NavbarThemeSwitcher />
 
@@ -31,13 +40,8 @@ const { width: windowWidth } = useWindowSize()
 
     <!-- 👉 Pages -->
     <RouterView v-slot="{ Component }">
-      <Transition
-        :name="appRouteTransition"
-        mode="out-in"
-      >
-        <Component :is="Component" />
-      </Transition>
-    </RouterView>
+    <Component :is="Component" />
+  </RouterView>
 
     <!-- 👉 Footer -->
     <template #footer>
