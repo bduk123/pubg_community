@@ -249,6 +249,29 @@
           </VCardText>
         </VCard>
       </div>
+      <div class="d-flex flex-wrap mb-3">
+        <VCard
+          class="me-3 mb-2"
+          elevation="1"
+          :style="{ width: '254px', height: '80px', backgroundColor: isDark ? '#374151' : '#f4f4f5' }"
+        >
+          <VCardTitle class="text-subtitle-2 font-weight-bold">Банк нэр</VCardTitle>
+          <VCardText :class="isDark ? 'text-white' : 'text-black'" class="pt-0">
+            {{ selectedPlayer?.bank_name }}
+          </VCardText>
+        </VCard>
+
+        <VCard
+          class="mb-2"
+          elevation="1"
+          :style="{ width: '254px', height: '80px', backgroundColor: isDark ? '#374151' : '#f4f4f5' }"
+        >
+          <VCardTitle class="text-subtitle-2 font-weight-bold">Данс</VCardTitle>
+          <VCardText :class="isDark ? 'text-white' : 'text-black'" class="pt-0">
+            {{ selectedPlayer?.account_iban }}
+          </VCardText>
+        </VCard>
+      </div>
     </VCardText>
   </VCard>
 
@@ -287,7 +310,7 @@
 </div>
   </VCardText>
 </VCard>
-<VCard class="mt-4">
+<VCard class="mt-4 ">
   <VCardTitle class="font-weight-bold mt-3">
     Social Links
   </VCardTitle>
@@ -328,6 +351,17 @@
       Steam
     </VBtn>
     <VBtn
+      v-if="selectedPlayer.social_links.youtube"
+      :href="selectedPlayer.social_links.youtube"
+      target="_blank"
+      rel="noopener"
+      color="default"
+      variant="outlined"
+      prepend-icon="mdi-youtube"
+    >
+      YouTube
+    </VBtn>
+    <VBtn
       v-if="selectedPlayer.social_links.discord"
       :href="selectedPlayer.social_links.discord"
       target="_blank"
@@ -351,7 +385,7 @@
     </VBtn>
   </div>
 
-  <div v-else :class="isDark ? 'text-white' : 'text-black'" class="text-medium-emphasis mt-2 mb-3 text-center w-100">
+  <div v-else :class="isDark ? 'text-white' : 'text-black'" class="text-medium-emphasis mt-2 mb-3 text-center w-100" >
     Энэ тоглогч сошиал хаяг оруулаагүй байна.
   </div>
 </VCardText>
@@ -406,6 +440,8 @@ const getRandomColor = () => {
       avatar: avatar1,
       role: 'Tier-5',
       pubg_id: 'TNT_SANTANA',
+      account_iban: "61001008000501027",
+      bank_name: "Хаан банк",
       social_links: {
         facebook: 'https://facebook.com/santana',
         instagram: 'https://instagram.com/santana',
@@ -425,6 +461,8 @@ const getRandomColor = () => {
       name: 'Rullet',
       avatar: avatar2,
       social_links: null,
+      account_iban: "61001008000501027",
+      bank_name: "Худалдаа хөгжил банк",
       youtube_embed:'<iframe width="560" height="315" src="https://www.youtube.com/embed/TWUKUQtrnRU?si=yendAidfJ96CXTsH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
       badge: {
         0: 'хүндэт PUBG-чин',
@@ -440,11 +478,14 @@ const getRandomColor = () => {
       id: 2,
       name: 'Abdie',
       avatar: avatar3,
+      account_iban: "61001008000501027",
+      bank_name: "Голомт банк",
       social_links: {
         facebook: 'https://facebook.com/abdie',
         steam: 'https://steam.com/abdie',
         discord: 'https://discord.com/invite/abdie',
         twitch: 'https://twitch.com/santana',
+        youtube: 'https://www.youtube.com/@AbdiePUBG',
       },
       role: 'Tier 7-2',
       youtube_embed: '<iframe width="560" height="315" src="https://www.youtube.com/embed/2zquaQQDz5c?si=OTewCmRo0EmqRmcH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
